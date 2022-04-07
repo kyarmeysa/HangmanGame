@@ -2,12 +2,13 @@ const word = document.querySelector('#word');
 const correctletters = [];
 const wrongletters = [];
 const popup = document.getElementById('popup-container');
-const selectedword = RandomWord();
+let selectedword = RandomWord();
 const wrongletter = document.getElementById('wrong-letters')
 const items = document.querySelectorAll('.item');
 const message = document.getElementById('popup-message');
 const popupcolor = document.querySelector('.popup');
 const mbox = document.getElementById('message') 
+const btn  = document.querySelector('#play-again');
 
 function RandomWord() {
     const words = ["PITBULL","DANUA","ROTTWEILER","DOBERMAN","HUSKY","SHEPHERD"];
@@ -62,6 +63,16 @@ function DisplayMessage(){
     }, 2000)
 
 }
+btn.addEventListener('click', function(){
+    correctletters.splice(0);
+    wrongletters.splice(0);
+    selectedword = RandomWord();
+    DisplayWord();
+    UpdateWrongLetters();
+    popup.style.display ='none';
+    
+
+})
 
  
    
