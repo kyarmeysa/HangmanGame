@@ -5,6 +5,9 @@ const popup = document.getElementById('popup-container');
 const selectedword = RandomWord();
 const wrongletter = document.getElementById('wrong-letters')
 const items = document.querySelectorAll('.item');
+const message = document.getElementById('popup-message');
+const popupcolor = document.querySelector('.popup');
+const mbox = document.getElementById('message') 
 
 function RandomWord() {
     const words = ["PITBULL","DANUA","ROTTWEILER","DOBERMAN","HUSKY","SHEPHERD"];
@@ -24,7 +27,8 @@ function DisplayWord() {
 `;
     const w = word.innerText.replace(/\n/g, '');
     if (w === selectedword) {
-        popup.style.display = 'flex'
+        popup.style.display = 'flex';
+        message.innerText = 'You Fount The Word!'
     }
 }
  
@@ -42,6 +46,21 @@ function DisplayWord() {
         }
 
     })
+    if(wrongletters.length=== items.length){
+        popup.style.display = 'flex';
+        popupcolor.style.background = 'red';
+       
+        message.innerText = "You Lost Unfortunately, Plaase Try Again"
+
+    }
+}
+function DisplayMessage(){
+    mbox.classList.add('show');
+    setTimeout(function(){
+        mbox.classList.remove('show');
+
+    }, 2000)
+
 }
 
  
@@ -56,12 +75,16 @@ window.addEventListener('keydown', function (e) {
                 correctletters.push(letter);
                 DisplayWord();
             } else {
+                DisplayMessage();
+                
 
             }
         } else { 
             if(!wrongletters.includes(letter)){
                 wrongletters.push(letter);
                 UpdateWrongLetters();
+            } else{
+                DisplayMessage();
             }
 
         }
