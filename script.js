@@ -1,6 +1,7 @@
 const word = document.querySelector('#word');
 const correctletters= ['R', 'T','O','W','E','I','L'];
 const wrongletters=[];
+const popup =document.getElementById('popup-container');
 
 function RandomWord(){
     const words = ["CANE CORSO","GREAT DANE","ROTTWEILER","DOBERMAN","HUSKY","GERMANY SHEPHERD"]
@@ -20,7 +21,7 @@ function DisplayWord(){
 `;
 const w = word.innerText.replace(/\n/g,'');
 if(w === selectedword){
-    console.log('You Found The Word!')
+    popup.style.display = 'flex'
 }
 }
 
