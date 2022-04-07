@@ -1,28 +1,50 @@
 const word = document.querySelector('#word');
-const correctletters= ['R', 'T','O','W','E','I','L'];
-const wrongletters=[];
-const popup =document.getElementById('popup-container');
+const correctletters = [];
+const wrongletters = [];
+const popup = document.getElementById('popup-container');
+const selectedword = RandomWord();
 
-function RandomWord(){
-    const words = ["CANE CORSO","GREAT DANE","ROTTWEILER","DOBERMAN","HUSKY","GERMANY SHEPHERD"]
-    return words[Math.floor(Math.random()* words.length)]
+function RandomWord() {
+    const words = ["PITBULL","DANUA","ROTTWEILER","DOBERMAN","HUSKY","SHEPHERD"];
+    return words[Math.floor(Math.random() * words.length)]
 }
 
-function DisplayWord(){
-    const selectedword =RandomWord();
-   
+function DisplayWord() {
+
+
     word.innerHTML = `
     ${selectedword.split('').map(letter => `
         <div class="letter">
-            ${correctletters.includes(letter)? letter : ''}
+            ${correctletters.includes(letter) ? letter : ''}
         </div>
     `).join('')}
 
 `;
-const w = word.innerText.replace(/\n/g,'');
-if(w === selectedword){
-    popup.style.display = 'flex'
+    const w = word.innerText.replace(/\n/g, '');
+    if (w === selectedword) {
+        popup.style.display = 'flex'
+    }
 }
-}
+window.addEventListener('keydown', function (e) {
+    if (e.keyCode >= 65 && e.keyCode <= 90) {
+        const letter = e.key.toUpperCase();
+        if (selectedword.includes(letter)) {
+
+            if (!correctletters.includes(letter)) {
+                correctletters.push(letter);
+                DisplayWord();
+            } else {
+
+            }
+        } else { 
+            if(!wrongletters.includes(letter)){
+                wrongletters.push(letter);
+            }
+
+        }
+
+    }
+
+})
 
 DisplayWord();
